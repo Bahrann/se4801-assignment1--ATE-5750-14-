@@ -61,3 +61,27 @@ In this section, I implemented the core entities for the ShopWave system using S
 ## Conclusion
 
 The domain model is fully implemented with proper structure, relationships, and validation, providing a solid base for the rest of the system.
+
+
+## C3: Repository & Service Layer
+
+C3 implements the repository and service layer for products.
+
+- ProductRepository: Extends JpaRepository<Product, Long> with custom queries:
+    - findByCategoryId(Long categoryId)
+    - findByPriceLessThanEqual(BigDecimal maxPrice)
+    - findByNameContainingIgnoreCase(String keyword)
+    - findTopByOrderByPriceDesc() (most expensive product)
+
+- ProductService: Handles product operations with proper transaction management:
+    - Create products (createProduct)
+    - Retrieve all products (getAllProducts)
+    - Get a product by ID (getProductById)
+    - Search products by keyword and/or price (searchProducts)
+    - Update stock with validation (updateStock)
+
+- ProductMapper: Converts between Product entities and DTOs.
+
+- ProductNotFoundException: Custom runtime exception with descriptive messages.
+
+
