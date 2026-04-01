@@ -18,3 +18,46 @@ This is a project setup with Spring Boot 3.5.13.
 
 ## Notes
 - Configured via application.properties
+
+
+
+# C2: Domain Model
+
+
+
+In this section, I implemented the core entities for the ShopWave system using Spring Boot, JPA, and Lombok. These entities represent the main parts of the application such as products, categories, and orders.
+
+---
+
+## Entities
+
+* **Category**: Stores product categories with name and description.
+* **Product**: Represents items for sale, including price, stock, and category.
+* **Order**: Represents a customer order, including status, total amount, and order items.
+* **OrderItem**: Represents individual products within an order.
+* **OrderStatus**: Enum for order states (PENDING, SHIPPED, DELIVERED, CANCELLED).
+
+---
+
+## Relationships
+
+* A category can have many products.
+* A product belongs to one category.
+* An order can have many order items.
+* Each order item is linked to one product and one order.
+
+---
+
+## Key Features
+
+* Used JPA annotations for mapping (`@Entity`, `@OneToMany`, `@ManyToOne`, etc.)
+* Added validation (`@NotBlank`, `@Positive`, `@Min`)
+* Used `@CreationTimestamp` for automatic date tracking
+* Implemented `addItem()` method in Order to handle adding items and calculating total
+* Enabled `orphanRemoval` to automatically delete removed order items
+
+---
+
+## Conclusion
+
+The domain model is fully implemented with proper structure, relationships, and validation, providing a solid base for the rest of the system.
