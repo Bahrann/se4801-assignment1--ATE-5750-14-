@@ -85,3 +85,51 @@ C3 implements the repository and service layer for products.
 - ProductNotFoundException: Custom runtime exception with descriptive messages.
 
 
+# Shopwave Starter – C4 Assignment
+
+Spring Boot REST API for managing products with categories:
+- Create product
+- List products (paginated)
+- Get product by ID
+- Search by keyword/max price
+- Update stock
+
+Tech: Java 21, Spring Boot 3.5, Maven, H2, Lombok, Validation
+
+## B. Setup & Run
+1. Clone repo:
+   git clone <repo-url>
+   cd shopwave-starter
+2. Run with Maven Wrapper:
+   ./mvnw spring-boot:run      # Linux/Mac
+   mvnw.cmd spring-boot:run    # Windows
+3. Seeded categories: Electronics, Clothing, Books
+
+## C. API Endpoints
+
+The API manages products with these endpoints: GET /api/products for paginated products, GET /api/products/{id} for a single product, POST /api/products to create a product, GET /api/products/search to filter by keyword or maxPrice, and PATCH /api/products/{id}/stock to update stock. All endpoints return JSON and proper HTTP status codes (200, 201, 400, 404).
+
+## D. Sample Requests
+POST /api/products
+{
+"name": "Laptop Pro",
+"description": "High-end laptop",
+"price": 1299.99,
+"stock": 10,
+"categoryId": 1
+}
+
+GET /api/products/search?keyword=laptop&maxPrice=1500
+
+PATCH /api/products/1/stock
+{
+"delta": -2
+}
+
+## E. Tests & Verification
+Run tests:
+mvn test
+Check:
+- Application starts without errors
+- All tests pass
+- API responses match expected outputs
