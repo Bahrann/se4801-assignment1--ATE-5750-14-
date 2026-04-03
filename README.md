@@ -133,3 +133,60 @@ Check:
 - Application starts without errors
 - All tests pass
 - API responses match expected outputs
+
+
+## C5 – Testing
+
+This project includes comprehensive testing for the Product module using different testing strategies in Spring Boot.
+
+### 1. ProductServiceTest (Unit Test with Mockito)
+
+* Uses Mockito to mock dependencies (`ProductRepository`, `CategoryRepository`)
+* Tests:
+
+    *  Successful product creation (happy path)
+    *  Exception when category is not found
+
+### 2. ProductControllerTest (Web Layer Test)
+
+* Uses `@WebMvcTest` to test only the controller layer
+* Uses a mocked `ProductService` (without deprecated `@MockBean`)
+* Tests:
+
+    *  `GET /api/products` returns **200 OK** with paginated response
+    *  `GET /api/products/999` returns **404 Not Found** with error JSON
+
+### 3. ProductRepositoryTest (Data Layer Test with H2)
+
+* Uses `@DataJpaTest` with in-memory H2 database
+* Tests:
+
+    * `findByNameContainingIgnoreCase` returns correct filtered results
+
+### Test Execution
+
+Run all tests using:
+
+```
+mvn test
+```
+
+### Test Results
+
+* All tests pass successfully:
+
+    * No failures
+    *  No errors
+    *  Build successful
+
+---
+
+### Notes
+
+* Modern Spring Boot practices were followed
+* Deprecated features like `@MockBean` were avoided
+* Clean separation of test layers:
+
+    * Unit (Service)
+    * Web (Controller)
+    * Data (Repository)
